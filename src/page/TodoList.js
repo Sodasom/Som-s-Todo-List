@@ -8,7 +8,6 @@ import {
   faAngleLeft,
   faCirclePlus,
 } from '@fortawesome/free-solid-svg-icons';
-import { TodoItemData } from './TodoItemData';
 
 const TodoListBox = styled.div`
   margin-top: 72px;
@@ -56,8 +55,8 @@ const TodoListBox = styled.div`
 
 const TodoList = ({ todo, setTodo }) => {
   const navigate = useNavigate();
-  const [completeTodo, setCompleteTodo] = useState(false);
-  const [completeTodoCount, setCompleteCountTodo] = useState(0);
+
+  const [checkItems, setCheckItems] = useState([]);
 
   return (
     <>
@@ -73,8 +72,13 @@ const TodoList = ({ todo, setTodo }) => {
             </button>
           </div>
         </div>
-        <div className="finishTodo">개 완료됨</div>
-        <TodoItem todo={todo} setTodo={setTodo} />
+        <div className="finishTodo">{checkItems.length}개 완료됨</div>
+        <TodoItem
+          todo={todo}
+          setTodo={setTodo}
+          checkItems={checkItems}
+          setCheckItems={setCheckItems}
+        />
         <button className="todoPlusButton" onClick={() => navigate('/insert')}>
           <FontAwesomeIcon icon={faCirclePlus}></FontAwesomeIcon>
         </button>

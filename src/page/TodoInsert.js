@@ -67,7 +67,7 @@ const TodoInsert = ({ inputValue, setInputValue }) => {
             ></textarea>
           </div>
           <button>
-            <span>날짜선택</span>
+            <span>날짜선택 (업데이트 준비중)</span>
             <FontAwesomeIcon icon={faAngleRight}></FontAwesomeIcon>
           </button>
         </form>

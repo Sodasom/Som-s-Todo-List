@@ -1,8 +1,10 @@
-import React from 'react';
 import styled from 'styled-components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faDeleteLeft } from '@fortawesome/free-solid-svg-icons';
-import { faHeart } from '@fortawesome/free-regular-svg-icons';
+import {
+  faDeleteLeft,
+  faHeart as solidHeart,
+} from '@fortawesome/free-solid-svg-icons';
+import { faHeart as regularHeart } from '@fortawesome/free-regular-svg-icons';
 
 const TodoItems = styled.div`
   display: flex;
@@ -43,20 +45,33 @@ const TodoItems = styled.div`
   }
 `;
 
-const TodoItem = ({ todo, setTodo }) => {
+const TodoItem = ({ todo, setTodo, checkItems, setCheckItems }) => {
   const deleteTodo = (id) => {
     const filterData = todo.filter((list) => list.id !== id);
     setTodo(filterData);
   };
+
+  const handleCheckChange = (checked, id) => {
+    if (checked) {
+      setCheckItems([...checkItems, id]);
+    } else {
+      setCheckItems(checkItems.filter((el) => el !== id));
+    }
+  };
+
   return (
     <>
       {todo.map((list) => (
-        <TodoItems>
+        <TodoItems key={list.id}>
           <label>
-            <input type="checkbox" />
+            <input
+              type="checkbox"
+              onChange={(e) => handleCheckChange(e.target.checked, list.id)}
+              checked={checkItems.includes(list.id) ? true : false}
+            />
             <FontAwesomeIcon
               className="incompleteTodo"
-              icon={faHeart}
+              icon={checkItems.includes(list.id) ? solidHeart : regularHeart}
             ></FontAwesomeIcon>
           </label>
           <div className="todoContent">
