@@ -57,13 +57,14 @@ const Header = ({ menu, setMenu, inputValue, todo, setTodo }) => {
     setTodo([
       ...todo,
       {
-        id: todo.length,
+        id: todo.length + 1,
         todo: inputValue.todo,
         memo: inputValue.memo,
         checked: false,
       },
     ]);
     navigate('/list');
+    console.log(todo);
   };
 
   return (
